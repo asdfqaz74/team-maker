@@ -1,5 +1,10 @@
-export default function getToday() {
-  const now = new Date();
-  const kst = new Date(now.getTime() + 9 * 60 * 60 * 1000);
-  return kst.toISOString().split("T")[0];
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+export function getToday(): string {
+  return dayjs().tz("Asia/Seoul").format("YYYY-MM-DD");
 }
